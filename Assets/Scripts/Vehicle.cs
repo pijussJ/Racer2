@@ -6,9 +6,18 @@ public class Vehicle : MonoBehaviour
 {
     public float speed = 10.0f;
     public float turnSpeed = 100.0f;
+    public Rigidbody rb;
+    public AudioSource engineSound;
+    private void Update()
+    {
+        print(rb.velocity.magnitude * 3.6f + " km/h");
+
+        var speedRatio = rb.velocity.magnitude / speed ;
+        engineSound.pitch = 0.5f + 1.5f * speedRatio;
+    }
     public void Accelarate()
     {
-        transform.position += transform.forward * speed *  Time.deltaTime;
+        rb.velocity += transform.forward * speed * Time.deltaTime;
     }
     public void Brake()
     {
